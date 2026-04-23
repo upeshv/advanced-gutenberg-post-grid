@@ -24,11 +24,15 @@ To use this block in a local or production environment, you need to compile the 
 
         npm install
 
-3. Compile the assets for production:
+3. Run the automated test suite to verify your local setup:
+
+        npm run test:unit
+
+4. Compile the assets for production:
 
         npm run build
 
-4. Activate the plugin through the 'Plugins' screen in the WordPress Admin Dashboard.
+5. Activate the plugin through the 'Plugins' screen in the WordPress Admin Dashboard.
 
 ## 💻 Available NPM Commands
 
