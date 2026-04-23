@@ -1,0 +1,23 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+// Loads only in the WP Admin - handles editor UI states
+.my-custom-post-grid-preview {
+    border: 2px dashed #cbd5e1;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 8px;
+
+    .loading-state {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 40px;
+        color: #64748b;
+        font-weight: 500;
+    }
+}

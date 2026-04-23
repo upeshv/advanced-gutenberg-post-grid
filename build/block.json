@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "my-plugin/advanced-post-grid",
+  "version": "0.1.0",
+  "title": "Advanced Post Grid",
+  "category": "widgets",
+  "icon": "grid-view",
+  "description": "A dynamic React-powered post grid for enterprise filtering.",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "postCount": {
+      "type": "number",
+      "default": 3
+    },
+    "categoryId": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "textdomain": "my-post-grid",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}
