@@ -28,3 +28,25 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# macOS & Windows System Files (Protects against .DS_Store)
+.DS_Store
+**/.DS_Store
+._*
+**/*._*
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
