@@ -1,33 +1,29 @@
 /**
- * Registers a new block provided a unique name and an object defining its behavior.
+ * Entry point for the Advanced Post Grid block.
  *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ * Bootstraps the React components and styles into the Gutenberg editor.
  */
+
+// Import Core Block capabilities.
 import { registerBlockType } from '@wordpress/blocks';
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
+// Import Webpack compiled styles.
 import './style.scss';
 
-/**
- * Internal dependencies
- */
+// Import Internal Dependencies.
 import Edit from './edit';
 import metadata from './block.json';
 
 /**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ * Register the Block.
+ * * @note This is a dynamic block. The React 'Edit' component manages the editor state, 
+ * but the frontend is strictly rendered via PHP (render.php). Therefore, the 'save' 
+ * method must explicitly return null to prevent static HTML serialization.
  */
 registerBlockType( metadata.name, {
 	/**
 	 * @see ./edit.js
 	 */
 	edit: Edit,
+	save: () => null,
 } );

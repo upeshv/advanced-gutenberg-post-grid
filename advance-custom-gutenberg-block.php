@@ -15,11 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-/**
- * Registers the block using the stable.
- */
-function advanced_post_grid_block_init() {
-    register_block_type( __DIR__ . '/build' );
+if ( ! function_exists( 'advanced_post_grid_block_init' ) ) {
+    /**
+     * Registers the block using the metadata loaded from the block.json file.
+     * This ensures assets are only enqueued when the block is rendered.
+     */
+    function advanced_post_grid_block_init() {
+        register_block_type( __DIR__ . '/build' );
+    }
+    
+    add_action( 'init', 'advanced_post_grid_block_init' );
 }
-
-add_action( 'init', 'advanced_post_grid_block_init' );

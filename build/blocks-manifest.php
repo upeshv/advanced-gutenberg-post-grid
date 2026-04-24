@@ -4,7 +4,7 @@ return array(
 	'build' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'my-plugin/advanced-post-grid',
+		'name' => 'advanced-post-grid/grid',
 		'version' => '0.1.0',
 		'title' => 'Advanced Post Grid',
 		'category' => 'widgets',
@@ -26,11 +26,10 @@ return array(
 				'default' => 0
 			)
 		),
-		'textdomain' => 'my-post-grid',
+		'textdomain' => 'advanced-post-grid',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
-		'render' => 'file:./render.php',
-		'viewScript' => 'file:./view.js'
+		'render' => 'file:./render.php'
 	)
 );

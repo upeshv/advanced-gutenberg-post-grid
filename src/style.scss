@@ -1,30 +1,61 @@
 /**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
+ * Frontend and Editor shared styles for Advanced Post Grid.
+ * Built using strict BEM architecture to prevent CSS bleed.
  */
 
-// Loads everywhere - handles the core grid structure
-.post-grid-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.advanced-post-grid-preview {
+    
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
 
-    .post-item {
-        background: #fff;
-        padding: 20px;
+    &__item {
         border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border-radius: 6px;
+        padding: 1.5rem;
+        background-color: #ffffff;
+        transition: box-shadow 0.2s ease-in-out;
+
+        &:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
 
         h4 {
-            margin-top: 0;
-            font-size: 1.2rem;
-            color: #333;
+            margin: 0 0 0.75rem 0;
+            font-size: 1.25rem;
+
+            a {
+                text-decoration: none;
+                color: inherit;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
+    }
+
+    &__excerpt {
+        font-size: 0.95rem;
+        color: #555555;
+        line-height: 1.5;
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    &__state--empty {
+        padding: 3rem;
+        text-align: center;
+        background-color: #fafafa;
+        border: 2px dashed #cccccc;
+        color: #666666;
+        border-radius: 6px;
     }
 }
