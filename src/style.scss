@@ -10,12 +10,12 @@
         padding: 0;
         margin: 0;
         display: grid;
-        // Rely on the inline CSS variable injected by React/PHP, fallback to 1 column
+        /* Rely on the inline CSS variable injected by React/PHP */
         grid-template-columns: repeat(var(--apg-columns, 1), 1fr);
         gap: 1.5rem;
 
-        // "Senior" Mobile Optimization: Force single column on mobile to protect UI
-        @media (max-width: 600px) {
+        /* Responsive layout: Collapse to single column on mobile and portrait tablets */
+        @media (max-width: 768px) {
             grid-template-columns: 1fr !important;
         }
     }
@@ -28,11 +28,11 @@
         padding: 1.5rem;
         background-color: #ffffff;
         transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-        height: 100%; // Ensures all cards in a row are the same height
+        height: 100%;
 
         &:hover {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transform: translateY(-2px); // Subtle micro-interaction
+            transform: translateY(-2px);
         }
 
         h4 {
@@ -51,19 +51,20 @@
         }
     }
 
-    // --- NEW: Core Web Vitals Image Optimization ---
+    /* --- Core Web Vitals (CWV) Media Optimization --- */
     &__image {
-        margin: -1.5rem -1.5rem 1.5rem -1.5rem; // Pulls image to the edges of the card
+        margin: -1.5rem -1.5rem 1.5rem -1.5rem;
         border-bottom: 1px solid #e0e0e0;
         overflow: hidden;
         border-radius: 6px 6px 0 0;
-        aspect-ratio: 16 / 9; // Prevents CLS by reserving space before image loads
-        background-color: #f0f0f0; // Skeleton loading color
+        /* Enforce aspect ratio to prevent Cumulative Layout Shift (CLS) */
+        aspect-ratio: 16 / 9; 
+        background-color: #f0f0f0; 
 
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover; // Ensures the image fills the space without distortion
+            object-fit: cover; 
             display: block;
         }
     }
@@ -72,7 +73,7 @@
         font-size: 0.95rem;
         color: #555555;
         line-height: 1.6;
-        flex-grow: 1; // Pushes any footer/metadata to the bottom of the card
+        flex-grow: 1;
 
         p {
             margin-bottom: 0;

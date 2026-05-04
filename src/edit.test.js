@@ -11,22 +11,23 @@ import Edit from './edit';
 import { useSelect } from '@wordpress/data';
 
 /**
- * Mocking WordPress Data Store
+ * Mock WordPress Data Store
  */
 jest.mock('@wordpress/data', () => ({
     useSelect: jest.fn(),
 }));
 
 /**
- * Mocking WordPress Element (Specifically RawHTML to prevent test crashes)
+ * Mock WordPress Element hooks and components
  */
 jest.mock('@wordpress/element', () => ({
     RawHTML: ({ children }) => <div data-testid="raw-html">{children}</div>,
+    useMemo: (callback) => callback(),
 }));
 
 /**
- * Mocking native WP components to keep the DOM snapshot lightweight 
- * and allow for interaction testing.
+ * Mock native WP UI components.
+ * This ensures lightweight DOM snapshots and exposes interaction handlers for testing.
  */
 jest.mock('@wordpress/components', () => ({
     PanelBody: ({ children }) => <div data-testid="panel-body">{children}</div>,
@@ -39,9 +40,10 @@ jest.mock('@wordpress/components', () => ({
             onChange={(e) => onChange(Number(e.target.value))} 
         />
     ),
-    SelectControl: ({ value, options, onChange }) => (
+    SelectControl: ({ value, options, onChange, label }) => (
         <select 
-            data-testid="select-control" 
+            data-testid={`select-control-${label}`} 
+            aria-label={label}
             value={value} 
             onChange={(e) => onChange(e.target.value)}
         >
@@ -116,11 +118,10 @@ describe('Advanced Post Grid - Edit Component', () => {
     });
 
     it('renders an error notice when the REST API fails', () => {
-        // The "Senior" Error Boundary Test
         useSelect.mockReturnValue({
             posts: null,
             hasResolved: true,
-            apiError: true, // Simulating a 500 error or network failure
+            apiError: true, 
             categories: [],
         });
 
@@ -165,14 +166,14 @@ describe('Advanced Post Grid - Edit Component', () => {
 
         render(<Edit attributes={defaultAttributes} setAttributes={setAttributesMock} />);
         
-        // 1. Test the Range Control (Number of Posts)
+        // Trigger Range Control update (Number of Posts)
         const rangeInput = screen.getByTestId('range-control-Number of Posts');
         fireEvent.change(rangeInput, { target: { value: '6' } });
         expect(setAttributesMock).toHaveBeenCalledWith({ postCount: 6 });
 
-        // 2. Test the Toggle Control (Display Image)
+        // Trigger Toggle Control update (Display Image)
         const toggleInput = screen.getByTestId('toggle-control-Show Featured Image');
         fireEvent.click(toggleInput);
-        expect(setAttributesMock).toHaveBeenCalledWith({ displayImage: false }); // Toggling from true to false
+        expect(setAttributesMock).toHaveBeenCalledWith({ displayImage: false }); 
     });
 });

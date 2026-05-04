@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, RangeControl, SelectControl, Spinner, Notice, ToggleControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { RawHTML } from '@wordpress/element';
+import { useMemo, RawHTML } from '@wordpress/element';
 
 /**
  * Styles
@@ -24,7 +24,7 @@ import './editor.scss';
 export default function Edit( { attributes, setAttributes } ) {
     const { postCount, categoryId, columns, orderBy, displayImage } = attributes;
 
-    // Inject generic block classes and inline CSS variables for our dynamic grid layout
+    // Inject generic block classes and inline CSS variables for the dynamic grid layout
     const blockProps = useBlockProps( {
         className: 'advanced-post-grid-preview',
         style: { '--apg-columns': columns }
@@ -42,13 +42,13 @@ export default function Edit( { attributes, setAttributes } ) {
                 ...( categoryId ? { categories: categoryId } : {} ) 
             };
 
-            // Setup cache-keys for resolution tracking
+            // Define cache keys for accurate resolution tracking
             const queryArgs = [ 'postType', 'post', postQuery ];
 
             return {
                 posts: getEntityRecords( ...queryArgs ),
                 hasResolved: hasFinishedResolution( 'getEntityRecords', queryArgs ),
-                // If resolution finished but posts is strictly null, the API failed (e.g., 500 error or network drop)
+                // Strict null check verifies if resolution finished but data fetching failed (e.g., 500 error)
                 apiError: hasFinishedResolution( 'getEntityRecords', queryArgs ) && getEntityRecords( ...queryArgs ) === null,
                 categories: getEntityRecords( 'taxonomy', 'category', { per_page: -1 } ),
             };
@@ -56,16 +56,17 @@ export default function Edit( { attributes, setAttributes } ) {
         [ postCount, categoryId, orderBy ]
     );
 
-    // Format categories using useMemo-style mapping for better performance
-    const categoryOptions = [ 
-        { label: __( 'All Categories', 'advanced-post-grid' ), value: 0 },
-        ...( categories?.map( ( cat ) => ( { label: cat.name, value: cat.id } ) ) || [] )
-    ];
+    // Memoize category mapping to prevent unnecessary recalculations on re-renders
+    const categoryOptions = useMemo( () => {
+        return [ 
+            { label: __( 'All Categories', 'advanced-post-grid' ), value: 0 },
+            ...( categories?.map( ( cat ) => ( { label: cat.name, value: cat.id } ) ) || [] )
+        ];
+    }, [ categories ] );
 
     return (
         <div { ...blockProps }>
             
-            {/* --- SIDEBAR SETTINGS --- */}
             <InspectorControls>
                 <PanelBody title={ __( 'Grid Layout Settings', 'advanced-post-grid' ) }>
                     <RangeControl
@@ -116,30 +117,29 @@ export default function Edit( { attributes, setAttributes } ) {
                 </PanelBody>
             </InspectorControls>
 
-            {/* --- VISUAL EDITOR PREVIEW --- */}
             <div className="advanced-post-grid-preview__content">
                 
                 { ! hasResolved ? (
-                    // State 1: Fetching
+                    // UI State: Loading Data
                     <div className="apg-state apg-state--loading">
                         <Spinner />
                         <p>{ __( 'Fetching latest posts...', 'advanced-post-grid' ) }</p>
                     </div>
 
                 ) : apiError ? (
-                    // State 2: Error (The "Senior" check)
+                    // UI State: API Resolution Failure
                     <Notice status="error" isDismissible={ false }>
                         { __( 'Error loading posts. Please check your connection or REST API status.', 'advanced-post-grid' ) }
                     </Notice>
 
                 ) : ! posts?.length ? (
-                    // State 3: Empty
+                    // UI State: Empty Results
                     <Notice status="warning" isDismissible={ false }>
                         { __( 'No posts found matching this criteria.', 'advanced-post-grid' ) }
                     </Notice>
 
                 ) : (
-                    // State 4: Success
+                    // UI State: Successfully Populated Grid
                     <ul className="advanced-post-grid-preview__list" style={ { display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: '20px' } }>
                         { posts.map( ( post ) => (
                             <li key={ post.id } className="advanced-post-grid-preview__item">

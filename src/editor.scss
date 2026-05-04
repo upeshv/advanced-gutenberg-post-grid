@@ -1,11 +1,11 @@
 /**
  * Editor-only styles for Advanced Post Grid.
- * Built using strict BEM architecture to prevent block editor CSS collisions.
+ * Built using strict BEM architecture to prevent block editor CSS collisions
+ * and utilize native WordPress design tokens.
  */
 
 .advanced-post-grid-preview {
-    // Note: Grid column layout is dynamically handled via inline CSS variables
-    // injected from edit.js (e.g., var(--apg-columns))
+    /* Grid layout is dynamically controlled via --apg-columns injected by React */
 
     &__content {
         margin-top: 1rem;
@@ -15,15 +15,19 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        /* Default grid setup, overridden by inline style for reactivity */
+        display: grid;
+        gap: 1.25rem;
     }
 
     &__item {
-        // Using native WP admin variables for seamless UI integration
         border: 1px solid var(--wp-admin-border-color, #e2e4e7);
         border-radius: 4px;
         padding: 1.25rem;
         background: #fff;
         transition: box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
 
         &:hover {
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -33,14 +37,28 @@
             margin: 0 0 0.5rem 0;
             font-size: 1.1rem;
             color: var(--wp-components-color-foreground, #1e1e1e);
+            line-height: 1.4;
         }
 
         p {
             font-size: 0.9rem;
-            color: #646970; // Standard WP Admin Gray
+            color: #646970;
             margin: 0;
+            line-height: 1.5;
         }
     }
+}
+
+/* --- Core Web Vitals (CWV) Media Optimization --- */
+
+.apg-placeholder-image {
+    width: 100%;
+    /* Enforce aspect ratio to prevent Cumulative Layout Shift (CLS) */
+    aspect-ratio: 16 / 9;
+    border-radius: 3px;
+    background-color: var(--wp-admin-border-color, #e2e4e7);
+    margin-bottom: 1rem;
+    display: block;
 }
 
 /* --- Reusable UI States --- */
@@ -61,9 +79,4 @@
         border: 1px dashed var(--wp-admin-border-color, #8c8f94);
         color: var(--wp-components-color-foreground, #1e1e1e);
     }
-}
-
-.apg-placeholder-image {
-    border-radius: 3px;
-    background-color: var(--wp-admin-border-color, #e2e4e7);
 }

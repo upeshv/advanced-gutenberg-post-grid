@@ -20,8 +20,9 @@ This block utilizes a **Hybrid Rendering Architecture** to balance editor reacti
 To use this block in a local or production environment, you need to compile the React assets.
 
 1. Clone the repository into your WordPress plugins folder (`/wp-content/plugins/`):
-    `git clone https://github.com/upeshv/advanced-gutenberg-post-grid.git`
-    `cd advanced-gutenberg-post-grid`
+```bash
+git clone [https://github.com/upeshv/advanced-gutenberg-post-grid.git](https://github.com/upeshv/advanced-gutenberg-post-grid.git)
+cd advanced-gutenberg-post-grid
 
 2. Install Node dependencies:
     `npm install`
@@ -60,6 +61,15 @@ To verify the dynamic fetching and filtering functionality:
 * **Type-Safe Attributes:** All block attributes are strictly cast (e.g., `absint`, `rest_sanitize_boolean`) before being evaluated.
 * **Late Escaping:** Frontend data is escaped immediately before output using `esc_html`, `esc_url`, and `wp_kses_post` adhering to strict WordPress security standards.
 * **Compatibility:** Optimized for WordPress 6.1+ (Tested up to 6.5) and PHP 7.4 through 8.2+.
+
+## ✅ Development Verification
+
+To ensure enterprise-grade stability, this block undergoes strict automated and visual verification before deployment:
+
+* **Automated Logic:** 100% pass rate on Jest unit tests covering API resolution and error handling.
+* **Asset Pipeline:** Webpack-optimized production builds for minimal frontend footprint.
+
+![Unit Test Results](screenshots/test-results.png)
 
 ## ❓ FAQ
 
