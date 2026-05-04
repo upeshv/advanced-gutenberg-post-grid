@@ -20,9 +20,8 @@ This block utilizes a **Hybrid Rendering Architecture** to balance editor reacti
 To use this block in a local or production environment, you need to compile the React assets.
 
 1. Clone the repository into your WordPress plugins folder (`/wp-content/plugins/`):
-```bash
-git clone [https://github.com/upeshv/advanced-gutenberg-post-grid.git](https://github.com/upeshv/advanced-gutenberg-post-grid.git)
-cd advanced-gutenberg-post-grid
+    `git clone [https://github.com/upeshv/advanced-gutenberg-post-grid.git](https://github.com/upeshv/advanced-gutenberg-post-grid.git)`
+    `cd advanced-gutenberg-post-grid`
 
 2. Install Node dependencies:
     `npm install`
