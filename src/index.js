@@ -16,14 +16,15 @@ import metadata from './block.json';
 
 /**
  * Register the Block.
- * * @note This is a dynamic block. The React 'Edit' component manages the editor state, 
+ * 
+ * @note This is a dynamic block. The React 'Edit' component manages the editor state, 
  * but the frontend is strictly rendered via PHP (render.php). Therefore, the 'save' 
  * method must explicitly return null to prevent static HTML serialization.
  */
-registerBlockType( metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
-	save: () => null,
+registerBlockType( metadata, {
+    /**
+     * @see ./edit.js
+     */
+    edit: Edit,
+    save: () => null,
 } );

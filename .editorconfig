@@ -1,9 +1,6 @@
 # This file is for unifying the coding style for different editors and IDEs
 # editorconfig.org
 
-# WordPress Coding Standards
-# https://make.wordpress.org/core/handbook/coding-standards/
-
 root = true
 
 # Unix-style newlines with a newline ending every file
@@ -15,16 +12,20 @@ trim_trailing_whitespace = true
 indent_style = tab
 
 # Modern JS / React / Block Standards (Spaces)
-[*.{js,jsx,ts,tsx,json,yml,md}]
+[*.{js,jsx,ts,tsx,json}]
+indent_style = space
+indent_size = 2
+
+# CI/CD & Configs: YAML strictly requires spaces (Tabs will break pipelines)
+[*.{yml,yaml}]
 indent_style = space
 indent_size = 2
 
 # WordPress PHP Core Standard (Tabs)
 [*.php]
 indent_style = tab
-indent_size = 4
 
-# SCSS / CSS
+# SCSS / CSS (Gutenberg Prettier Standard)
 [*.{css,scss}]
 indent_style = space
 indent_size = 2
@@ -32,3 +33,5 @@ indent_size = 2
 # Markdown formatting
 [*.md]
 trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2

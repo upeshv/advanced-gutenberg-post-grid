@@ -1,28 +1,37 @@
 {
-	"name": "advance-custom-gutenberg-block",
-	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
-	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
-	"scripts": {
-		"build": "wp-scripts build --webpack-copy-php --blocks-manifest",
-		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
-		"packages-update": "wp-scripts packages-update",
-		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start --webpack-copy-php --blocks-manifest",
-		"test:unit": "wp-scripts test-unit-js"
-	},
-	"dependencies": {
-		"@wordpress/block-editor": "latest",
-		"@wordpress/blocks": "latest",
-		"@wordpress/i18n": "latest"
-	},
-	"devDependencies": {
-		"@testing-library/jest-dom": "^6.9.1",
-		"@testing-library/react": "^16.3.2",
-		"@wordpress/scripts": "^32.0.0"
-	}
+    "name": "advance-custom-gutenberg-block",
+    "version": "1.0.0",
+    "description": "A dynamic React-powered post grid for enterprise filtering.",
+    "author": "Upesh Vishwakarma",
+    "license": "GPL-2.0-or-later",
+    "main": "build/index.js",
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=9.0.0"
+    },
+    "scripts": {
+        "build": "wp-scripts build --webpack-copy-php --blocks-manifest",
+        "start": "wp-scripts start --webpack-copy-php --blocks-manifest",
+        "format": "wp-scripts format",
+        "lint": "npm run lint:js && npm run lint:css",
+        "lint:css": "wp-scripts lint-style",
+        "lint:js": "wp-scripts lint-js",
+        "packages-update": "wp-scripts packages-update",
+        "plugin-zip": "wp-scripts plugin-zip",
+        "test:unit": "wp-scripts test-unit-js",
+        "test:unit:watch": "wp-scripts test-unit-js --watch"
+    },
+    "dependencies": {
+        "@wordpress/block-editor": "^13.0.0",
+        "@wordpress/blocks": "^13.0.0",
+        "@wordpress/components": "^28.0.0",
+        "@wordpress/data": "^10.0.0",
+        "@wordpress/element": "^6.0.0",
+        "@wordpress/i18n": "^5.0.0"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^6.9.1",
+        "@testing-library/react": "^16.3.2",
+        "@wordpress/scripts": "^32.0.0"
+    }
 }

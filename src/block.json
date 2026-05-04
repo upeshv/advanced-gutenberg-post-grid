@@ -7,20 +7,48 @@
 	"category": "widgets",
 	"icon": "grid-view",
 	"description": "A dynamic React-powered post grid for enterprise filtering.",
-	"example": {},
+	"keywords": ["posts", "grid", "query"],
+	"example": {
+        "attributes": {
+            "postCount": 3,
+            "columns": 3,
+            "displayImage": true
+        }
+    },
 	"supports": {
-		"html": false
+		"html": false,
+		"align": ["wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
 	},
 	"attributes": {
-		"postCount": {
-			"type": "number",
-			"default": 3
-		},
-		"categoryId": {
-			"type": "number",
-			"default": 0
-		}
-	},
+        "postCount": {
+            "type": "number",
+            "default": 3
+        },
+        "columns": {
+            "type": "number",
+            "default": 3
+        },
+        "categoryId": {
+            "type": "number",
+            "default": 0
+        },
+        "orderBy": {
+            "type": "string",
+            "default": "date"
+        },
+        "order": {
+            "type": "string",
+            "default": "desc"
+        },
+        "displayImage": {
+            "type": "boolean",
+            "default": true
+        }
+    },
 	"textdomain": "advanced-post-grid",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
