@@ -60,3 +60,8 @@ To verify the dynamic fetching and filtering functionality:
 * **Type-Safe Attributes:** All block attributes are strictly cast (e.g., `absint`, `rest_sanitize_boolean`) before being evaluated.
 * **Late Escaping:** Frontend data is escaped immediately before output using `esc_html`, `esc_url`, and `wp_kses_post` adhering to strict WordPress security standards.
 * **Compatibility:** Optimized for WordPress 6.1+ (Tested up to 6.5) and PHP 7.4 through 8.2+.
+
+## ❓ FAQ
+
+**Does the block make constant API calls?**
+No. The implementation relies on the local WordPress data store cache. It only pings the REST API when a user explicitly modifies block attributes that change the query parameters.
