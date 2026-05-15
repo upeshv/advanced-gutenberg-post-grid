@@ -78,6 +78,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Show Featured Image', 'advanced-post-grid' ) }
 						checked={ displayImage }
 						onChange={ ( value ) => setAttributes( { displayImage: value } ) }
+						__nextHasNoMarginBottom={ true }
 					/>
 				</PanelBody>
 
@@ -140,10 +141,24 @@ export default function Edit( { attributes, setAttributes } ) {
 										<div
 											className="advanced-post-grid__image-wrapper"
 											style={ { backgroundImage: imageUrl ? `url(${imageUrl})` : 'none' } }
+											role="img"
+											aria-label={ post.title.rendered }
 										></div>
 									) }
-									<h4>{ post.title.rendered }</h4>
-									<RawHTML>{ post.excerpt.rendered }</RawHTML>
+									<h4 className="advanced-post-grid__title">
+										{/* WCAG: Prevent dummy links from trapping keyboard users in the editor */}
+										<a 
+											href="#preview" 
+											onClick={ ( e ) => e.preventDefault() }
+											tabIndex="-1"
+										>
+											{ post.title.rendered }
+										</a>
+									</h4>
+									
+									<div className="advanced-post-grid__excerpt">
+										<RawHTML>{ post.excerpt.rendered }</RawHTML>
+									</div>
 								</li>
 							);
 						} ) }

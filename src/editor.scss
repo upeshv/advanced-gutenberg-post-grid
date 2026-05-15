@@ -1,5 +1,5 @@
 /**
- * Editor-only styles for Advanced Post Grid.
+ * Editor Styles: Advanced Post Grid
  */
 
 // Colors and Tokens
@@ -20,10 +20,6 @@ $apg-admin-font-size-excerpt: 0.9rem;
 $apg-admin-border-radius: 4px;
 $apg-admin-border-radius-small: 3px;
 
-/**
- * Editor-only styles for Advanced Post Grid.
- */
-
 .advanced-post-grid {
 
 	&__content {
@@ -42,29 +38,36 @@ $apg-admin-border-radius-small: 3px;
 	&__item {
 		display: flex;
 		flex-direction: column;
-		padding: $apg-admin-spacing-item;
+		position: relative;
 		background: $apg-admin-bg;
 		border: 1px solid var(--wp-admin-border-color, #e2e4e7);
 		border-radius: $apg-admin-border-radius;
+		overflow: hidden; // Ensures edge-to-edge images don't break rounded corners.
 		transition: box-shadow 0.2s ease;
 
 		&:hover {
+			transform: translateY(-2px);
 			box-shadow: 0 2px 4px $apg-admin-shadow;
+
+			/* Underline the title when hovering anywhere on the card */
+			.advanced-post-grid__title a {
+				text-decoration: underline;
+			}
 		}
-	}
 
-	&__title {
-		margin: 0 0 0.5rem 0;
-		font-size: $apg-admin-font-size-title;
-		color: var(--wp-components-color-foreground, #1e1e1e);
-		line-height: 1.4;
-	}
+		/* Accessibility: Respect user motion preferences. */
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
 
-	&__excerpt {
-		margin: 0;
-		font-size: $apg-admin-font-size-excerpt;
-		color: $apg-admin-text-excerpt;
-		line-height: 1.5;
+			&:hover {
+				transform: none;
+				
+				/* Keeping the underline even if motion is reduced */
+				.advanced-post-grid__title a {
+					text-decoration: underline;
+				}
+			}
+		}
 	}
 
 	&__image-wrapper {
@@ -75,7 +78,58 @@ $apg-admin-border-radius-small: 3px;
 		background-color: var(--wp-admin-border-color, #e2e4e7);
 		background-size: cover;
 		background-position: center;
-		border-radius: $apg-admin-border-radius-small;
+		border-bottom: 1px solid var(--wp-admin-border-color, #e2e4e7);
+	}
+
+	&__title {
+		// Use the item spacing token for horizontal margins to match frontend layout.
+		margin: $apg-admin-spacing-item $apg-admin-spacing-item 0.5rem $apg-admin-spacing-item;
+		font-size: $apg-admin-font-size-title;
+		color: var(--wp-components-color-foreground, #1e1e1e);
+		line-height: 1.4;
+
+		a {
+			position: static;
+			color: inherit;
+			text-decoration: none;
+			outline: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+
+			// Applying a custom focus ring to the entire card layout for keyboard navigation accessibility.
+			&:focus-visible::after {
+				border-radius: 6px;
+				outline: 2px solid var(--wp-components-color-foreground, #1e1e1e);
+				
+				// Inset the outline to prevent clipping from the parent container's overflow rules.
+				outline-offset: -2px; 
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 10;
+			}
+		}
+	}
+
+	// Remove top margin when the title directly follows an image wrapper.
+	&__image-wrapper + &__title {
+		margin-top: 0;
+	}
+
+	&__excerpt {
+		flex-grow: 1;
+		margin: 0 $apg-admin-spacing-item $apg-admin-spacing-item $apg-admin-spacing-item;
+		font-size: $apg-admin-font-size-excerpt;
+		color: $apg-admin-text-excerpt;
+		line-height: 1.5;
 	}
 
 	&__state {

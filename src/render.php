@@ -76,19 +76,23 @@ $apg_wrapper_attributes = get_block_wrapper_attributes(
 						<?php /* --- FEATURED IMAGE --- */ ?>
 						<?php if ( true === $apg_display_image && has_post_thumbnail() ) : ?>
 							<div class="advanced-post-grid__image-wrapper">
-								<?php /* Hide redundant image links from screen readers for accessibility */ ?>
-								<a href="<?php echo esc_url( get_permalink() ); ?>" aria-hidden="true" tabindex="-1">
-									<?php
-									the_post_thumbnail(
-										'medium',
-										array(
-											'loading' => 'lazy',
-											'alt'     => esc_attr( wp_strip_all_tags( get_the_title() ) ),
-											'class'   => 'advanced-post-grid__image', 
-										)
-									);
-									?>
-								</a>
+								<?php 
+								$apg_thumb_id = get_post_thumbnail_id();
+								$apg_alt_text = get_post_meta( $apg_thumb_id, '_wp_attachment_image_alt', true );
+								if ( empty( $apg_alt_text ) ) {
+									$apg_alt_text = wp_strip_all_tags( get_the_title() );
+								}
+								
+								the_post_thumbnail(
+									'medium',
+									array(
+										'loading' => 'lazy',
+										'class'   => 'advanced-post-grid__image',
+										'alt'     => esc_attr( $apg_alt_text ),
+									)
+								);
+								
+								?>
 							</div>
 						<?php endif; ?>
 
