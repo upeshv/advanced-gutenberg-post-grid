@@ -1,6 +1,6 @@
 === Advanced Post Grid ===
 Contributors:      Upesh Vishwakarma
-Tags:              block, grid, dynamic, react, gutenberg, performance
+Tags:              block, posts, dynamic, gutenberg/react, grid
 Requires at least: 6.2
 Tested up to:      6.9
 Requires PHP:      7.4
