@@ -1,5 +1,5 @@
 {
-    "name": "advance-custom-gutenberg-block",
+    "name": "advanced-post-grid",
     "version": "1.0.0",
     "description": "A dynamic React-powered post grid for enterprise filtering.",
     "author": "Upesh Vishwakarma",
@@ -10,8 +10,8 @@
         "npm": ">=9.0.0"
     },
     "scripts": {
-        "build": "wp-scripts build --webpack-copy-php --blocks-manifest",
-        "start": "wp-scripts start --webpack-copy-php --blocks-manifest",
+        "build": "wp-scripts build",
+        "start": "wp-scripts start",
         "format": "wp-scripts format",
         "lint": "npm run lint:js && npm run lint:css",
         "lint:css": "wp-scripts lint-style",
@@ -21,17 +21,15 @@
         "test:unit": "wp-scripts test-unit-js",
         "test:unit:watch": "wp-scripts test-unit-js --watch"
     },
-    "dependencies": {
+    "devDependencies": {
+        "@testing-library/jest-dom": "^6.9.1",
+        "@testing-library/react": "^16.3.2",
         "@wordpress/block-editor": "^13.0.0",
         "@wordpress/blocks": "^13.0.0",
         "@wordpress/components": "^28.0.0",
         "@wordpress/data": "^10.0.0",
         "@wordpress/element": "^6.0.0",
-        "@wordpress/i18n": "^5.0.0"
-    },
-    "devDependencies": {
-        "@testing-library/jest-dom": "^6.9.1",
-        "@testing-library/react": "^16.3.2",
+        "@wordpress/i18n": "^5.0.0",
         "@wordpress/scripts": "^32.0.0"
     }
 }

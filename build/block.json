@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "advanced-post-grid/grid",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "title": "Advanced Post Grid",
   "category": "widgets",
   "icon": "grid-view",
@@ -12,6 +12,7 @@
     "grid",
     "query"
   ],
+  "textdomain": "advanced-post-grid",
   "example": {
     "attributes": {
       "postCount": 3,
@@ -33,11 +34,15 @@
   "attributes": {
     "postCount": {
       "type": "number",
-      "default": 3
+      "default": 3,
+      "minimum": 1,
+      "maximum": 100
     },
     "columns": {
       "type": "number",
-      "default": 3
+      "default": 3,
+      "minimum": 1,
+      "maximum": 6
     },
     "categoryId": {
       "type": "number",
@@ -45,18 +50,27 @@
     },
     "orderBy": {
       "type": "string",
-      "default": "date"
+      "default": "date",
+      "enum": [
+        "date",
+        "title",
+        "menu_order",
+        "rand"
+      ]
     },
     "order": {
       "type": "string",
-      "default": "desc"
+      "default": "desc",
+      "enum": [
+        "asc",
+        "desc"
+      ]
     },
     "displayImage": {
       "type": "boolean",
       "default": true
     }
   },
-  "textdomain": "advanced-post-grid",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",

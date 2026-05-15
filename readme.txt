@@ -1,8 +1,8 @@
 === Advanced Post Grid ===
 Contributors:      Upesh Vishwakarma
 Tags:              block, grid, dynamic, react, gutenberg, performance
-Tested up to:      6.5
-Requires at least: 6.1
+Requires at least: 6.2
+Tested up to:      6.9
 Requires PHP:      7.4
 Stable tag:        1.0.0
 License:           GPL-2.0-or-later
@@ -53,7 +53,7 @@ To verify the enterprise-grade functionality:
 **Compatibility:**
 * **WordPress:** 6.1 through 6.5+.
 * **PHP:** 7.4 through 8.2+.
-* **Standards:** Adheres to WCAG 2.1 Accessibility and Core Web Vitals benchmarks.
+* **Standards:** Adheres to WCAG 2.2 Accessibility and Core Web Vitals benchmarks.
 
 == Frequently Asked Questions ==
 

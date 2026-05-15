@@ -1,92 +1,124 @@
 /**
- * Frontend and Editor shared styles for Advanced Post Grid.
- * Built using strict BEM architecture to prevent CSS bleed.
+ * Advanced Post Grid - Design Tokens and Block Styles
  */
 
-.advanced-post-grid-preview {
-    
-    &__list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        /* Rely on the inline CSS variable injected by React/PHP */
-        grid-template-columns: repeat(var(--apg-columns, 1), 1fr);
-        gap: 1.5rem;
+// Colors
+$apg-color-border: #e0e0e0;
+$apg-color-bg-item: #ffffff;
+$apg-color-bg-alt: #fafafa;
+$apg-color-bg-placeholder: #f0f0f0;
+$apg-color-text-main: #1e1e1e;
+$apg-color-text-muted: #555555;
+$apg-color-shadow: rgba(0, 0, 0, 0.08);
 
-        /* Responsive layout: Collapse to single column on mobile and portrait tablets */
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr !important;
-        }
-    }
+// Spacing
+$apg-spacing-base: 1.5rem;
+$apg-spacing-small: 0.75rem;
 
-    &__item {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #e0e0e0;
-        border-radius: 6px;
-        padding: 1.5rem;
-        background-color: #ffffff;
-        transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-        height: 100%;
+// Typography
+$apg-font-size-title: 1.25rem;
+$apg-font-size-excerpt: 0.95rem;
 
-        &:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transform: translateY(-2px);
-        }
+/**
+ * Block Styles
+ */
 
-        h4 {
-            margin: 0 0 0.75rem 0;
-            font-size: 1.25rem;
-            line-height: 1.3;
+.advanced-post-grid {
 
-            a {
-                text-decoration: none;
-                color: inherit;
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(var(--apg-columns, 1), 1fr);
+		gap: $apg-spacing-base;
+		list-style: none;
+		padding: 0;
+		margin: 0;
 
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
+		/* Responsive layout: Single column on mobile devices. */
+		@media (max-width: 768px) {
+			--apg-columns: 1;
+		}
+	}
 
-    /* --- Core Web Vitals (CWV) Media Optimization --- */
-    &__image {
-        margin: -1.5rem -1.5rem 1.5rem -1.5rem;
-        border-bottom: 1px solid #e0e0e0;
-        overflow: hidden;
-        border-radius: 6px 6px 0 0;
-        /* Enforce aspect ratio to prevent Cumulative Layout Shift (CLS) */
-        aspect-ratio: 16 / 9; 
-        background-color: #f0f0f0; 
+	&__item {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		background-color: $apg-color-bg-item;
+		border: 1px solid $apg-color-border;
+		border-radius: 6px;
+		overflow: hidden;
+		transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            display: block;
-        }
-    }
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px $apg-color-shadow;
+		}
 
-    &__excerpt {
-        font-size: 0.95rem;
-        color: #555555;
-        line-height: 1.6;
-        flex-grow: 1;
+		/* Accessibility: Respect user motion preferences. */
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
 
-        p {
-            margin-bottom: 0;
-        }
-    }
+			&:hover {
+				transform: none;
+			}
+		}
+	}
 
-    &__state--empty {
-        padding: 3rem;
-        text-align: center;
-        background-color: #fafafa;
-        border: 2px dashed #cccccc;
-        color: #666666;
-        border-radius: 6px;
-        font-weight: 500;
-    }
+	&__image-wrapper {
+		display: block;
+		aspect-ratio: 16 / 9;
+		margin-bottom: $apg-spacing-base;
+		background-color: $apg-color-bg-placeholder;
+		border-bottom: 1px solid $apg-color-border;
+
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&__image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&__title {
+		margin: 0 $apg-spacing-base $apg-spacing-small $apg-spacing-base;
+		font-size: $apg-font-size-title;
+		line-height: 1.3;
+
+		a {
+			color: inherit;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&__excerpt {
+		flex-grow: 1;
+		margin: 0 $apg-spacing-base $apg-spacing-base $apg-spacing-base;
+		font-size: $apg-font-size-excerpt;
+		color: $apg-color-text-muted;
+		line-height: 1.6;
+
+		p {
+			margin-bottom: 0;
+		}
+	}
+
+	&__state {
+		padding: 3rem;
+		font-weight: 500;
+		text-align: center;
+		color: $apg-color-text-muted;
+		background-color: $apg-color-bg-alt;
+		border: 2px dashed darken($apg-color-border, 10%);
+		border-radius: 6px;
+	}
 }
